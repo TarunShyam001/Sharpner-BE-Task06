@@ -6,8 +6,8 @@ const server = http.createServer((req, res) => {
     const method = req.method;
 
     if (url === '/') {
-        // res.writeHead(200, { 'Content-Type': 'text/html' });
-        res.write('<html><head><ttle> Enter Message </title></head>')
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        res.write('<html><head><title> Enter Message </title></head>')
         res.write('<body><form action="/message" method="POST">');
         res.write('<input type="text" name="message"><button type="submit">Send</button>');
         res.write('</form></body></html>');
@@ -19,7 +19,7 @@ const server = http.createServer((req, res) => {
             console.log(chunk);
             body.push(chunk);
         });
-        req.on('end', () => {
+        return req.on('end', () => {
             const parsedBody = Buffer.concat(body).toString();
             const message = parsedBody.split('=')[1];
 
